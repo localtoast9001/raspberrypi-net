@@ -1,0 +1,6 @@
+<Project>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.1.118" />
+  </ItemGroup>
+</Project>

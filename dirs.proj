@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.Build.Traversal">
+  <ItemGroup>
+    <ProjectReference Include="RaspberryPi.Gpio/RaspberryPi.Gpio.csproj" />
+  </ItemGroup>
+</Project>
