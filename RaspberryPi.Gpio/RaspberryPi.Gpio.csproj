@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>RaspberryPi.Gpio</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="RaspberryPi.Gpio.UnitTest" />
+  </ItemGroup>
 
 </Project>
