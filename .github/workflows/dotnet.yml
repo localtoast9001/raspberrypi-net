@@ -49,6 +49,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: packages-${{ matrix.configuration }}
-        path: out/packages-${{ matrix.configuration }}
+        path: out/packages/${{ matrix.configuration }}
       # Use always() to always run this step to publish packages when there are test failures
       if: ${{ always() }}
