@@ -1,12 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <RootNamespace>RaspberryPi.Gpio</RootNamespace>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>GPIO library for .Net that uses pigpio and pigpiod under the hood.</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="RaspberryPi.Gpio.UnitTest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="docs/readme.md" Pack="true" PackagePath="/"/>
   </ItemGroup>
 
 </Project>

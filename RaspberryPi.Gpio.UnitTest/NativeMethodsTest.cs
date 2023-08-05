@@ -35,6 +35,7 @@ namespace RaspberryPi.Gpio.UnitTest
         /// Init local Pi using pigpiod.
         /// </summary>
         [TestMethod]
+        [Ignore]
         public void InitLocalPiTest()
         {
             int actual = NativeMethods.PiGpioStart(null, null);
