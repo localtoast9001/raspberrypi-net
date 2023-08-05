@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        configuration: [ 'Debug', 'Release' ]
 
     steps:
     - uses: actions/checkout@v3
@@ -23,6 +26,29 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }}
+    - name: Pack
+      run: dotnet pack --no-build --configuration ${{ matrix.configuration }}
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --configuration ${{ matrix.configuration }} --verbosity normal --logger trx --results-directory out/TestResults-${{ matrix.configuration }}
+    - name: Upload Test Results ${{ matrix.configuration }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: TestResults-${{ matrix.configuration }}
+        path: out/TestResults-${{ matrix.configuration }}
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
+    - name: Upload Binaries ${{ matrix.configuration }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.configuration }}-AnyCPU
+        path: out/${{ matrix.configuration }}-AnyCPU
+      # Use always() to always run this step to publish binaries when there are test failures
+      if: ${{ always() }}
+    - name: Upload Packages ${{ matrix.configuration }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: packages-${{ matrix.configuration }}
+        path: out/packages/${{ matrix.configuration }}
+      # Use always() to always run this step to publish packages when there are test failures
+      if: ${{ always() }}
