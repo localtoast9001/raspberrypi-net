@@ -32,9 +32,9 @@ jobs:
     - name: Test
       run: dotnet test --no-build --configuration {{ matrix.configuration }} --verbosity normal --logger trx --results-directory out/TestResults-{{ matrix.configuration }}
     - name: Upload Artifacts
-          uses: actions/upload-artifact@v3
-          with:
-            name: out
-            path: out
-          # Use always() to always run this step to publish test results when there are test failures
-          if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: out
+        path: out
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
