@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        configuration: [ 'Debug', 'Release' ]
 
     steps:
     - uses: actions/checkout@v3
@@ -23,6 +26,15 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration {{ matrix.configuration }}
+    - name: Pack
+      run: dotnet pack --no-build --configuration {{ matrix.configuration }}
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --configuration {{ matrix.configuration }} --verbosity normal --logger trx --results-directory out/TestResults-{{ matrix.configuration }}
+    - name: Upload Artifacts
+          uses: actions/upload-artifact@v3
+          with:
+            name: out
+            path: out
+          # Use always() to always run this step to publish test results when there are test failures
+          if: ${{ always() }}
