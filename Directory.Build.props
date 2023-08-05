@@ -11,6 +11,10 @@
     <PackageOutputPath>$(OutputRootDir)packages/</PackageOutputPath>
     <Product>RaspberryPi.Net</Product>
     <Copyright>Copyright (C) Jon Rowlett. All rights reserved.</Copyright>
+    <RepositoryUrl>https://github.com/localtoast9001/raspberrypi-net.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>True</IncludeSymbols>
+    <PackageVersion>1.0.0-alpha</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
