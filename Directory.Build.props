@@ -14,7 +14,12 @@
     <RepositoryUrl>https://github.com/localtoast9001/raspberrypi-net.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <IncludeSymbols>True</IncludeSymbols>
-    <PackageVersion>1.0.0-alpha</PackageVersion>
+    <ReleaseTag Condition="'$(GITHUB_REF_NAME)'!='' and '$(GITHUB_REF_TYPE)'=='tag'">$(GITHUB_REF_NAME)</ReleaseTag>
+    <ReleaseTag Condition="'$(ReleaseTag)'==''">0.1.0-alpha</ReleaseTag>
+    <ReleaseBaseVersion>$(ReleaseTag.Split('-')[0])</ReleaseBaseVersion>
+    <PreReleaseTag Condition="'$(ReleaseTag)'!='$(ReleaseBaseVersion)'">$(ReleaseTag.Substring($([MSBuild]::Add($(ReleaseBaseVersion.Length),1))))</PreReleaseTag>
+    <AssemblyVersion>$(ReleaseBaseVersion).0</AssemblyVersion>
+    <PackageVersion>$(ReleaseBaseVersion)-$(PreReleaseTag)</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
