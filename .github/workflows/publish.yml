@@ -23,4 +23,4 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release
       - name: Publish the package to GPR
-        run: dotnet nuget push out/packages/Release/*.nupkg --source github --api-key 0
+        run: dotnet nuget push out/packages/Release/*.nupkg --source github --skip-duplicate
