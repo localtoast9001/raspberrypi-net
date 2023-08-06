@@ -18,7 +18,6 @@ jobs:
           source-url: https://nuget.pkg.github.com/localtoast9001/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet nuget add source --username localtoast9001 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/localtoast9001/index.json"
       - run: dotnet build --configuration Release
       - name: Create the package
         run: dotnet pack --configuration Release
